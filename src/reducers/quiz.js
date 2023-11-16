@@ -4,17 +4,59 @@ import { createSlice } from "@reduxjs/toolkit";
 const questions = [
   {
     id: 1,
-    questionText: "Who set the Olympic record for the 100m dash in 2012?",
-    options: ["Usain Bolt", "Justin Gatlin", "Tyson Gay", "Asafa Powell"],
-    correctAnswerIndex: 0
+    questionText: "In the movie 'Casablanca', what drink does Rick Blaine famously prepare and offer to Ilsa Lund?",
+    options: ["Gin Martini", "Champagne Cocktail", "Sidecar", "French 75"],
+    correctAnswerIndex: 1
   },
   {
     id: 2,
     questionText:
-      "When was Michael Phelps last named male World Swimmer of the Year?",
-    options: ["2012", "2014", "2016", "2018"],
+      "What is the signature dessert that symbolizes reconciliation and forgiveness in the book/movie 'Chocolat' by Joanne Harris?",
+    options: ["Chocolate Cake", "Chocolate Truffles", "Hot Chocolate", "Chocolate Babka"],
     correctAnswerIndex: 2
-  }
+  },
+  {
+    id: 3,
+    questionText:
+      "In the movie 'Sideways', which wine variety does the main character, Miles Raymond, particularly admire and obsess over?",
+    options: ["Pinot Noir", "Merlot", "Chardonnay", "Cabernet Sauvignon"],
+    correctAnswerIndex: 0
+  },
+  {
+    id: 4,
+    questionText:
+      "What food item does Hannibal Lecter famously associate with his chilling character in 'The Silence of the Lambs'?",
+    options: ["Liver", "Brain", "Fava Beans", "Human Flesh"],
+    correctAnswerIndex: 2
+  },
+  {
+    id: 5,
+    questionText:
+      "Which drink is famously associated with The Dude in the movie 'The Big Lebowski'?",
+    options: ["White Russian", "Black Russian", "Mojito", "Manhattan"],
+    correctAnswerIndex: 0
+  },
+  {
+    id: 6,
+    questionText:
+      "What is the name of the magical candy that changes flavors as you eat it in the 'Harry Potter' series?",
+    options: ["Chocolate Frogs", "Fizzing Whizzbees", "Drooble's Best Blowing Gum", "Bertie Bott's Every Flavour Beans"],
+    correctAnswerIndex: 3
+  },
+  {
+    id: 7,
+    questionText:
+      "In the TV series 'Breaking Bad', what is the signature drink associated with the character Jesse Pinkman?",
+    options: ["Vodka Red Bull", "Tequila Sunrise", "Margarita on the Rocks", "Blue Sky (Blue Crystal Meth)"],
+    correctAnswerIndex: 3
+  },
+  {
+    id: 8,
+    questionText:
+      "In the novel 'Charlie and the Chocolate Factory' by Roald Dahl, what's the name of the gum that Violet Beauregarde chews, leading to an unusual consequence?",
+    options: ["Everlasting Gobstopper", "Three-Course Dinner Chewing Gum", "Chewy Chew", "Double Bubble"],
+    correctAnswerIndex: 1
+  },
 ];
 
 const initialState = {
