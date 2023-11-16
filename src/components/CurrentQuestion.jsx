@@ -7,7 +7,7 @@ export const CurrentQuestion = () => {
   const question = useSelector(
     (state) => state.quiz.questions[state.quiz.currentQuestionIndex]
   ) 
-  const quizOver = useSelector((state) => state.quiz.quizOver)
+  // const quizOver = useSelector((state) => state.quiz.quizOver)
   const currentQuestionIndex = useSelector((state) => state.quiz.currentQuestionIndex)
   const totalQuestions = useSelector((state) => state.quiz.questions.length)
 
@@ -28,10 +28,14 @@ export const CurrentQuestion = () => {
   }
 
   const onNextQuestion = () => {
-    dispatch(quiz.actions.goToNextQuestion())
-    setAnswered(false) // Reset for next question
-    setSelectedAnswer(null) // Reset for next question 
-  }
+    if (currentQuestionIndex + 1 === totalQuestions) {
+      setShowResults(true)
+    } else {
+        dispatch(quiz.actions.goToNextQuestion())
+        setAnswered(false) // Reset for next question
+        setSelectedAnswer(null) // Reset for next question 
+      }
+    }
 
   const handleSeeResults = () => {
     setShowResults(true)
@@ -70,8 +74,8 @@ export const CurrentQuestion = () => {
                 ) : (
                   <p>Sorry, your answer is incorrect!</p>
                 )}
-                <button onClick={quizOver ? handleSeeResults : onNextQuestion}>
-                  {quizOver ? "See your results" : "Next Question"}
+                <button onClick={currentQuestionIndex + 1 === totalQuestions ? handleSeeResults : onNextQuestion}>
+                {currentQuestionIndex + 1 === totalQuestions ? "Show Results" : "Next Question"}
                 </button>
               </>
             )}
