@@ -41,6 +41,13 @@ export const CurrentQuestion = () => {
     setShowResults(true)
   }
 
+  const handleRestart = () => {
+    dispatch(quiz.actions.restart())
+    setShowResults(false)
+    setAnswered(false)
+    setSelectedAnswer(null)
+  }
+
   return (
     <>
     {!showResults &&
@@ -83,6 +90,6 @@ export const CurrentQuestion = () => {
         )}
         </div>
       }
-      {showResults && <Results />}
+      {showResults && <Results handleRestart={handleRestart}/>}
       </>
     )}
