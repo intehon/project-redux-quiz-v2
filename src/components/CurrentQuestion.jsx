@@ -15,6 +15,7 @@ export const CurrentQuestion = () => {
   const [selectedAnswer, setSelectedAnswer] = useState(null) // State to track users selected answer
   const [showResults, setShowResults] = useState(false) // State to control wether to show the Results component
   const [answerSubmitted, setAnswerSubmitted] = useState(false) // State to track answer submitted
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null) // State to track wether answer is correct or not
   
   const dispatch = useDispatch()
 
@@ -27,6 +28,11 @@ export const CurrentQuestion = () => {
     setAnswered(true) //Update to indicate that user has answered question
     setSelectedAnswer(index) // Store selected index
     setAnswerSubmitted(true) //update state to indicate the submitted answer
+
+    //Check if answer is correct
+    const correctIndex = question.correctAnswerIndex
+    const answerCorrect = index === correctIndex
+    setIsAnswerCorrect(answerCorrect) 
   }
 
   const onNextQuestion = () => {
@@ -34,8 +40,9 @@ export const CurrentQuestion = () => {
       setShowResults(true)
     } else {
         dispatch(quiz.actions.goToNextQuestion())
-        setAnswered(false) // Reset for next question
-        setSelectedAnswer(null) // Reset for next question 
+        //Reset local state for next question
+        setAnswered(false) 
+        setSelectedAnswer(null)  
         setAnswerSubmitted(false)
       }
     }
@@ -51,6 +58,15 @@ export const CurrentQuestion = () => {
     setAnswered(false)
     setSelectedAnswer(null)
     setAnswerSubmitted(false) 
+  }
+
+  const getButtonStyle = (index) => {
+    if (answered && selectedAnswer === index) {
+      return isAnswerCorrect ? "buttonCorrect" : "buttonIncorrect"
+    }
+    if (!answered) {
+      return ""
+    }
   }
 
   return (
@@ -70,11 +86,8 @@ export const CurrentQuestion = () => {
                 }
               }}
               disabled={answerSubmitted} //disable if user already chosen an answer
-              style={{
-                backgroundColor: //change background color depending on if answer is right or wrong
-                answered && selectedAnswer === index ? 
-                question.correctAnswerIndex === index ? 'green' : 'red' : 'inherit'
-              }}>
+              className={getButtonStyle(index)} //use function to set class name
+              >
               {answer}
             </button>
           ))}
@@ -102,4 +115,5 @@ export const CurrentQuestion = () => {
       }
       {showResults && <Results handleRestart={handleRestart}/>}
       </>
-    )}
+    )
+  }
