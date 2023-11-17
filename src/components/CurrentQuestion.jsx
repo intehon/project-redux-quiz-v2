@@ -14,6 +14,7 @@ export const CurrentQuestion = () => {
   const [answered, setAnswered] = useState(false) //State to track if user has answered the question
   const [selectedAnswer, setSelectedAnswer] = useState(null) // State to track users selected answer
   const [showResults, setShowResults] = useState(false) // State to control wether to show the Results component
+  const [answerSubmitted, setAnswerSubmitted] = useState(false) // State to track answer submitted
   
   const dispatch = useDispatch()
 
@@ -25,6 +26,7 @@ export const CurrentQuestion = () => {
     dispatch(quiz.actions.submitAnswer({questionId: id, answerIndex: index}))
     setAnswered(true) //Update to indicate that user has answered question
     setSelectedAnswer(index) // Store selected index
+    setAnswerSubmitted(true) //update state to indicate the submitted answer
   }
 
   const onNextQuestion = () => {
@@ -34,6 +36,7 @@ export const CurrentQuestion = () => {
         dispatch(quiz.actions.goToNextQuestion())
         setAnswered(false) // Reset for next question
         setSelectedAnswer(null) // Reset for next question 
+        setAnswerSubmitted(false)
       }
     }
 
@@ -43,9 +46,11 @@ export const CurrentQuestion = () => {
 
   const handleRestart = () => {
     dispatch(quiz.actions.restart())
+    //return to initial state
     setShowResults(false)
     setAnswered(false)
     setSelectedAnswer(null)
+    setAnswerSubmitted(false) 
   }
 
   return (
@@ -59,7 +64,12 @@ export const CurrentQuestion = () => {
           {question.options.map((answer, index) => (
             <button 
               key={answer}
-              onClick={() => onAnswerSubmit(question.id, index)}
+              onClick={() => {
+                if (!answerSubmitted) {
+                  onAnswerSubmit(question.id, index)
+                }
+              }}
+              disabled={answerSubmitted} //disable if user already chosen an answer
               style={{
                 backgroundColor: //change background color depending on if answer is right or wrong
                 answered && selectedAnswer === index ? 
