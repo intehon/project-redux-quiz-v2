@@ -16,6 +16,32 @@ code {
   background-color: green;
 }
 
+.buttonCorrectBorder {
+  border: 2px solid #000;
+  animation: borderFlash 0.5s;
+}
+
+@keyframes borderFlash {
+  0% {
+    border-color: #000;
+  }
+  20% {
+    border-color: #ffffff; 
+  }
+  40% {
+    border-color: #000;
+  }
+  60% {
+    border-color: #ffffff; 
+  }
+  80% {
+    border-color: #000;
+  }
+  100% {
+    border-color: #ffffff;
+  }
+}
+
 .buttonIncorrect {
   background-color: red;
 }

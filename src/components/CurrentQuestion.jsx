@@ -67,6 +67,10 @@ export const CurrentQuestion = () => {
     if (!answered) {
       return ""
     }
+    if (isAnswerCorrect === false && index === question.correctAnswerIndex) {
+      return "buttonCorrectBorder"
+    }
+    return ""
   }
 
   return (
