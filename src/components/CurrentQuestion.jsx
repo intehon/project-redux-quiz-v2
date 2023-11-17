@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useDebugValue } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from '../reducers/quiz';
 import { Results } from './Results';
@@ -16,8 +16,15 @@ export const CurrentQuestion = () => {
   const [showResults, setShowResults] = useState(false) // State to control wether to show the Results component
   const [answerSubmitted, setAnswerSubmitted] = useState(false) // State to track answer submitted
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null) // State to track wether answer is correct or not
+  const [progressBar, setProgressBar] = useState(0) //State to track progress
   
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setProgressBar(((currentQuestionIndex + 1) / totalQuestions) * 100);
+    console.log("currentQuestionIndex:", currentQuestionIndex)
+    console.log("totalQuestions:", totalQuestions)
+  }, [currentQuestionIndex, totalQuestions])
 
   if (!question) {
     return <h1>Oh no! I could not find the current question!</h1>;
@@ -73,6 +80,10 @@ export const CurrentQuestion = () => {
     return ""
   }
 
+  const calculateProgress = () => {
+    return ((currentQuestionIndex + 1) / totalQuestions) * 100
+  }
+
   return (
     <>
     {!showResults &&
@@ -98,6 +109,12 @@ export const CurrentQuestion = () => {
           <div>
           <p>Question {currentQuestionIndex + 1} of {totalQuestions}</p>
           </div>
+          <div className="progressBar">
+              <div
+                className="progress"
+                style={{ width: `${calculateProgress()}%` }}
+              ></div>
+            </div>
         </div>
         {answered && (
           <div>
