@@ -8,12 +8,13 @@ export const Results = ({ handleRestart }) => {
     const correctAnswers = answers.filter((answer) => answer.isCorrect).length
 
     return (
-        <div>
+        <div className='resultsContainer'>
             <h2>Your results:</h2>
             <p>Correct answers: {correctAnswers} out of {totalQuestions}</p>
             <p>Do you think you could do better?</p>
             <button
             onClick={handleRestart}
+            className='restartButton'
             >Restart Quiz</button>
         </div>
     )

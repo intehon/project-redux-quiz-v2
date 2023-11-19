@@ -33,6 +33,9 @@ code {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Style for the options buttons */
@@ -158,4 +161,41 @@ code {
   .questionContainer h1 {
     font-size: 1.5rem; 
   }
+}
+
+/* Style for the overall results container */
+.resultsContainer {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: 20px auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the header in the results */
+.resultsContainer h2 {
+  margin-bottom: 10px;
+}
+
+/* Style for paragraphs in the results */
+.resultsContainer p {
+  margin-bottom: 15px;
+}
+
+/* Style for the button in the results */
+.restartButton {
+  padding: 8px 16px;
+  margin-top: 10px;
+  background-color: #ddb892;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hover effect for the button in the results */
+.restartButton:hover {
+  background-color: #e6ccb2;
 }
