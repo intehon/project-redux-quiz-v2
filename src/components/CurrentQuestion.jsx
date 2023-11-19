@@ -1,4 +1,4 @@
-import { useState, useEffect, useDebugValue } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { quiz } from '../reducers/quiz';
 import { Results } from './Results';
@@ -21,9 +21,7 @@ export const CurrentQuestion = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setProgressBar(((currentQuestionIndex + 1) / totalQuestions) * 100);
-    console.log("currentQuestionIndex:", currentQuestionIndex)
-    console.log("totalQuestions:", totalQuestions)
+    setProgressBar(((currentQuestionIndex + 1) / totalQuestions) * 100)
   }, [currentQuestionIndex, totalQuestions])
 
   if (!question) {
@@ -72,12 +70,12 @@ export const CurrentQuestion = () => {
       return isAnswerCorrect ? "buttonCorrect" : "buttonIncorrect"
     }
     if (!answered) {
-      return ""
+      return "buttonBase"
     }
     if (isAnswerCorrect === false && index === question.correctAnswerIndex) {
       return "buttonCorrectBorder"
     }
-    return ""
+    return "buttonBase"
   }
 
   const calculateProgress = () => {
@@ -86,55 +84,65 @@ export const CurrentQuestion = () => {
 
   return (
     <>
-    {!showResults &&
-      <div>
-        <div>
-          <h1>Question: {question.questionText}</h1>
-        </div> 
-        <div>
-          {question.options.map((answer, index) => (
-            <button 
-              key={answer}
-              onClick={() => {
-                if (!answerSubmitted) {
-                  onAnswerSubmit(question.id, index)
-                }
-              }}
-              disabled={answerSubmitted} //disable if user already chosen an answer
-              className={getButtonStyle(index)} //use function to set class name
-              >
-              {answer}
-            </button>
-          ))}
-          <div>
-          <p>Question {currentQuestionIndex + 1} of {totalQuestions}</p>
+      {!showResults && (
+        <div className="quizContainer">
+          <div className="questionContainer">
+            <h1>Question: {question.questionText}</h1>
           </div>
-          <div className="progressBar">
+          <div className="optionsContainer">
+            {question.options.map((answer, index) => (
+              <button
+                key={answer}
+                onClick={() => {
+                  if (!answerSubmitted) {
+                    onAnswerSubmit(question.id, index);
+                  }
+                }}
+                disabled={answerSubmitted} // Disable if user already chosen an answer
+                className={getButtonStyle(index)} // Use function to set class name
+              >
+                {answer}
+              </button>
+            ))}
+            <div className="questionInfo">
+              <p>
+                Question {currentQuestionIndex + 1} of {totalQuestions}
+              </p>
+            </div>
+            <div className="progressBar">
               <div
                 className="progress"
                 style={{ width: `${calculateProgress()}%` }}
               ></div>
             </div>
-        </div>
-        {answered && (
-          <div>
-            {selectedAnswer !== null && (
-              <>
-                {question.correctAnswerIndex === selectedAnswer ? (
-                  <p>Your answer is correct!</p>
-                ) : (
-                  <p>Sorry, your answer is incorrect!</p>
-                )}
-                <button onClick={currentQuestionIndex + 1 === totalQuestions ? handleSeeResults : onNextQuestion}>
-                {currentQuestionIndex + 1 === totalQuestions ? "Show Results" : "Next Question"}
-                </button>
-              </>
-            )}
           </div>
-        )}
+          {answered && (
+            <div className="answerFeedback">
+              {selectedAnswer !== null && (
+                <>
+                  {question.correctAnswerIndex === selectedAnswer ? (
+                    <p>Your answer is correct!</p>
+                  ) : (
+                    <p>Sorry, your answer is incorrect!</p>
+                  )}
+                  <button
+                    onClick={
+                      currentQuestionIndex + 1 === totalQuestions
+                        ? handleSeeResults
+                        : onNextQuestion
+                    }
+                  >
+                    {currentQuestionIndex + 1 === totalQuestions
+                      ? "Show Results"
+                      : "Next Question"}
+                  </button>
+                </>
+              )}
+            </div>
+          )}
         </div>
-      }
-      {showResults && <Results handleRestart={handleRestart}/>}
-      </>
-    )
-  }
+      )}
+      {showResults && <Results handleRestart={handleRestart} />}
+    </>
+  )
+}

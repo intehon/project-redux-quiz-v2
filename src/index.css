@@ -12,51 +12,150 @@ code {
     monospace;
 }
 
+/* Style for the overall quiz container */
+.quizContainer {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the question container */
+.questionContainer {
+  margin-bottom: 20px;
+}
+
+/* Style for the options container */
+.optionsContainer {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Style for the options buttons */
+.buttonBase {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ddb892;
+  color: #fff;
+}
+
+.buttonBase:hover {
+  background-color: #e6ccb2;
+}
+
+/* Style for the question info */
+.questionInfo {
+  margin-top: 15px;
+}
+
+/* Style for the progress bar container */
+.progressBar {
+  width: 100%;
+  height: 20px;
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+/* Style for the progress bar */
+.progress {
+  height: 100%;
+  background-color: #ddb892;
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Style for the "show results" or  "next question" button */
+.answerFeedback button {
+  padding: 8px 16px;
+  margin-top: 10px;
+  background-color: #ddb892;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.answerFeedback button:hover {
+  background-color: #e6ccb2;
+}
+
+/* Style for the correct or incorrect button */
 .buttonCorrect {
-  background-color: green;
+  background-color: #52b788;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.buttonIncorrect {
+  background-color: #ae2012;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #fff;
 }
 
 .buttonCorrectBorder {
-  border: 2px solid #000;
+  border: 3px solid #52b788;
   animation: borderFlash 0.5s;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ddb892;
+  color: #fff;
 }
 
 @keyframes borderFlash {
   0% {
-    border-color: #000;
+    border-color: #52b788;
   }
   20% {
     border-color: #ffffff; 
   }
   40% {
-    border-color: #000;
+    border-color: #52b788;
   }
   60% {
     border-color: #ffffff; 
   }
   80% {
-    border-color: #000;
+    border-color: #52b788;
   }
   100% {
     border-color: #ffffff;
   }
 }
 
-.buttonIncorrect {
-  background-color: red;
-}
+/* Media query for smaller screens (mobile-first) */
+@media screen and (max-width: 768px) {
+  .quizContainer {
+    padding: 15px;
+    border-radius: 8px;
+  }
 
-.progressBar {
-  width: 50%;
-  height: 20px;
-  background-color: lightgrey;
-  border-radius: 25px;
-  margin: 10px;
-}
-
-.progress {
-  height: 100%;
-  background-color: #e4819d;
-  border-radius: 25px;
-  transition: width 0.3s ease-in-out; /* Transition for smooth change */
+  .questionContainer h1 {
+    font-size: 1.5rem; 
+  }
 }
